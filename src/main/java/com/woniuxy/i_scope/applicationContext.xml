@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+		scope用于控制bean的作用范围，有4种取值：
+		1. singleton 单例， 默认值
+			在容器加载配置文件的时候，就会实例化bean，且只实例化一次！ （这不是单例模式）
+			多次获取同一个bean，都是同一个对象
+		2. prototype 多例
+			在容器加载配置文件的时候，不会直接实例化bean了，而是等到从容器中获取bean的时候才实例化bean。
+			每次获取bean时，都会实例化一个全新的bean！！
+			
+		3. request(今天讲不了)
+		4. session(今天讲不了)
+		
+		补充：在scope取值为singleton的前提下，默认是创建容器时，就直接实例化bean。 但是如果为bean元素加上lazy-init="true"时，
+		哪怕scope取值为singleton，也不会在建容器时，就直接实例化bean，而是在第一次获取bean时，才实例化.
+	 -->
+	 <bean id="u" class="com.woniuxy.i_scope.User" scope="singleton" lazy-init="true">
+	 	<property name="id" value="100"></property>
+	 	<property name="name" value="欧阳锋"></property>
+	 </bean>
+	 
+	 <bean class="com.woniuxy.i_scope.User">
+	 	<property name="id" value="103"></property>
+	 	<property name="name" value="裘千仞"></property>
+	 </bean>
+	 
+	 <bean class="com.woniuxy.i_scope.User">
+	 	<property name="id" value="104"></property>
+	 	<property name="name" value="小龙女"></property>
+	 </bean>
+	
+</beans>

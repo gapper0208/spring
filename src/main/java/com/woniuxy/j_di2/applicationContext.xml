@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="f" class="com.woniuxy.j_di2.Foo">
+		<property name="list">
+			<list>
+				<value>老猫</value>
+				<value>老虎</value>
+				<value>老鼠</value>
+				<value>老鼠</value>
+				<value>傻傻分不清楚</value>
+			</list>
+		</property>
+		<property name="set">
+			<set>
+				<value>双节棍</value>
+				<value>双节棍</value>
+				<value>周杰伦</value>
+				<value>周杰伦</value>
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry key="a" value="关公" />
+				<entry key="b" value="周公" />
+				<entry key="c" value="包公" />
+				<entry key="c" value="老公" />
+				<entry key="d" value="老公" />
+			</map>
+		</property>
+		<property name="prop">
+			<props>
+				<prop key="a">豆包</prop>
+				<prop key="b">豆沙包</prop>
+				<prop key="c">红豆沙包</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<!-- 为集合中加入类类型的元素 -->
+	<bean id="dd" class="java.util.Date" />
+	<bean id="f2" class="com.woniuxy.j_di2.Foo">
+		<property name="list"> 
+			<list>
+				<value>1</value>
+				<value>59.09</value>
+				<value>哈哈</value>
+				<ref bean="dd"/>
+			</list>
+		</property>
+	</bean>
+	
+	<util:constant id="str" static-field="com.woniuxy.j_di2.Bar.str"/>
+	
+	<bean id="bar" class="com.woniuxy.j_di2.Bar"></bean>
+	<util:property-path id="str2" path="bar.str2"/>
+	
+	<!-- 利用util命名空间，为集合属性注入值 -->
+	<util:list id="list1">
+		<value>aa</value>
+		<value>bb</value>
+		<value>cc</value>
+		<value>dd</value>
+		<value>ee</value>
+		<ref bean="str"/>
+		<ref bean="str2"/>
+		<value><![CDATA[<font><p><div>12321</div></p></font>]]></value>
+	</util:list>
+	
+	<util:set id="set1">
+		<value>xx</value>
+		<value>xx</value>
+		<value>yy</value>
+		<value>yy</value>
+		<value>zz</value>
+	</util:set>	
+	
+	<util:map id="map1">
+		<entry key="a" value="关公" />
+		<entry key="b" value="周公" />
+		<entry key="c" value="包公" />
+		<entry key="c" value="老公" />
+		<entry key="d" value="老公" />
+	</util:map>
+	<util:properties id="prop1">
+		<prop key="a">豆包!</prop>
+		<prop key="b">豆沙包!!</prop>
+		<prop key="c">红豆沙包!!</prop>
+	</util:properties>
+	
+	
+	<bean id="f3" class="com.woniuxy.j_di2.Foo" 
+		p:list-ref="list1" p:set-ref="set1" p:map-ref="map1" p:prop-ref="prop1"/>
+		
+	
+	
+	
+</beans>

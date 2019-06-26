@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:com/woniuxy/p_mix2/beans.xml"/>
+	
+	<!-- 这就是xml引入JavaConfig配置的写法 -->
+	<bean class="com.woniuxy.p_mix2.RootConfig"></bean>
+	
+	<bean id="u" class="com.woniuxy.p_mix2.User"
+		p:id="888" p:name="哈哈哈"></bean>
+
+</beans>

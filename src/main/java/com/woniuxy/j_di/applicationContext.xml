@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	 <!-- 构造器方式，为bean的属性注入值, 注意，必须有对应的构造器才行！！ -->
+	 <bean id="u" class="com.woniuxy.j_di.User">
+	 	<constructor-arg value="200"  />
+	 	<constructor-arg value="黄药师"  />
+	 </bean>
+	 
+	 <!-- setter方式注入，必须提供对应的setter方法  -->
+	 <bean id="u2" class="com.woniuxy.j_di.User">
+	 	<property name="id" value="300" />
+	 	<property name="name" value="王重阳" />
+	 </bean>
+	 
+	 <!-- 利用构造器，传入复合类型的参数 -->
+	 <bean id="c3" class="com.woniuxy.j_di.Car">
+	 	<property name="brand" value="一叶扁舟" />
+	 	<property name="color" value="绿色"></property>
+	 </bean>
+	 <bean id="u3" class="com.woniuxy.j_di.User">
+	 	<constructor-arg value="10" />
+	 	<constructor-arg value="韩立" />
+	 	<constructor-arg ref="c3" />
+	 </bean>
+	 
+	 
+	 <!-- 使用c命名空间，来为bean注入属性值 -->
+	 <bean id="c4" class="com.woniuxy.j_di.Car" 
+	 	c:brand="风火轮" c:color="红色" />
+	 <bean id="u4" class="com.woniuxy.j_di.User" 
+	 	c:id="222" c:name="哪吒" c:car-ref="c4" />
+
+
+	 <!-- 使用setter，来注入一个引用类型 -->	 	
+	 <bean id="c5" class="com.woniuxy.j_di.Car" 
+	 	c:brand="宝马" c:color="白色" />
+	 <bean id="u5" class="com.woniuxy.j_di.User">
+	 	<property name="id" value="345" />
+	 	<property name="name" value="马诺" />
+	 	<property name="car" ref="c5" />
+	 </bean>
+	 
+	 
+	 <!-- 使用setter + 内部bean的方式， 来注入一个引用类型的属性 -->	 	
+	 <bean id="u6" class="com.woniuxy.j_di.User">
+	 	<property name="id" value="111" />
+	 	<property name="name" value="关羽" />
+	 	<property name="car">
+		 	<!-- 内部bean无法被外界使用，只能被当前bean使用一次 -->
+	 		<bean  class="com.woniuxy.j_di.Car" c:brand="赤兔马" c:color="红色" />
+	 	</property>
+	 </bean>
+	 
+	 
+	 <!-- 如何为bean的属性，注入null值 -->
+	 <bean id="u7" class="com.woniuxy.j_di.User">
+	 	<property name="id" value="80" />
+	 	<property name="name"><null /></property>
+	 </bean>
+	 
+	 
+	 <!-- 级联属性配置 -->
+	 <bean id="c8" class="com.woniuxy.j_di.Car">
+	 	<property name="brand" value="老虎" />
+	 	<property name="color" value="白色" />
+	 </bean>
+	 <bean id="u8" class="com.woniuxy.j_di.User">
+	 	<property name="id" value="88" />
+	 	<property name="name" value="文殊菩萨" />
+	 	<property name="car" ref="c8" />
+	 	<property name="car.brand" value="狮子" />
+	 	<property name="car.color" value="棕色" />
+	 </bean>
+	 
+	 <!-- 使用p命名空间来给bean的属性注入值  -->
+	 <bean id="c9" class="com.woniuxy.j_di.Car" 
+	 	p:brand="白龙马" p:color="白色" />
+	 <bean id="u9" class="com.woniuxy.j_di.User" 
+	 	p:id="99" p:name="唐僧" p:car-ref="c9" />
+	 
+	 
+	 
+</beans>

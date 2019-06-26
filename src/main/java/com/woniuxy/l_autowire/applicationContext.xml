@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		自动装配
+		byType 按类型自动装配
+		1. 如果找到一个，就装配成功
+		2. 如果找不到，也不报错，注入null值
+		3. 如果找到多个，就抛出异常
+		
+		至此，ioc才学习完整了。 ioc有2个含义：
+		1. 本来需要自己new，现在交给容器来new，需要时，直接问容器要，至于容器实例化的是哪个了类的对象，我们无法控制。
+		2. 本来需要自己给bean的属性注入值，现在完全有容器来帮我们自动装配，至于容器装配的是哪个值给bean的属性，我们也无法控制。
+		
+		byName 按名称自动装配
+		1. 如果找到一个，就装配成功
+		2. 如果找到多个，不可能！！ 因为bean元素的id是必须唯一的！
+		3. 如果一个都找不到，保持null值
+		
+		杠点：
+		自己命名，自己写的类型，还非要再自动装配，这岂不是多此一举？
+		开发中，往往是团队开发，有人做car，有人做user，在分工情况下， 自动装配很有价值！
+	 -->	
+	<bean id="car" class="com.woniuxy.l_autowire.Car" 
+		p:brand="奥拓" p:color="绿色"  />
+	<bean id="car2" class="com.woniuxy.l_autowire.Car" 
+		p:brand="奥迪" p:color="白色"  />
+		
+	<bean id="u" class="com.woniuxy.l_autowire.User" 
+	p:id="123" p:name="葫芦娃" autowire="byName" />
+	 
+	 
+</beans>

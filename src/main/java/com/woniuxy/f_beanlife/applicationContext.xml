@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="u" class="com.woniuxy.f_beanlife.User" init-method="f1" destroy-method="f2">
+		<property name="id" value="101"></property>
+		<property name="name" value="张无忌"></property>
+	</bean>
+	
+	<bean id="f" class="com.woniuxy.f_beanlife.Foo" />
+
+</beans>

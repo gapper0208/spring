@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<bean id="c" class="com.woniuxy.t_xmlaop.CalcImpl" />
+	
+	<bean id="a" class="com.woniuxy.t_xmlaop.A" />
+	
+	<aop:config>
+		<aop:pointcut expression="execution(public int com.woniuxy.t_xmlaop.CalcImpl.*(int, int))" id="pc"/>
+		<aop:aspect ref="a" order="1">
+		
+			<aop:before method="f1" pointcut-ref="pc" />
+			<aop:after method="f2" pointcut-ref="pc" />
+		</aop:aspect>
+	</aop:config>
+	
+</beans>

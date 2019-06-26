@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+		创建bean的三种方式：
+		1. 使用无参构造器
+	 -->
+	 <bean id="u" class="com.woniuxy.h_createbean.User"></bean>
+	 
+	 <!-- 
+	 	2. 使用静态工厂（静态工厂不是23种设计模式中的工厂）
+	 	如果不加factory-method="getUser"，则会返回UserFactory本身的实例
+	 	如果加了factory-method="getUser"，则会返回getUser方法所返回的对象
+	  -->
+	  <bean id="u2" class="com.woniuxy.h_createbean.UserFactory" factory-method="getUser"></bean>
+	  
+	  <!-- 
+	  	3. 使用实例工厂（实例工厂不是23种设计模式中的工厂）
+	   -->
+	   <bean id="uf" class="com.woniuxy.h_createbean.UserFactory"></bean>
+	   <bean id="u3" factory-bean="uf" factory-method="getUser2"></bean>
+		
+</beans>
